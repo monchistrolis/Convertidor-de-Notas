@@ -27,7 +27,69 @@
         }
       }
     </style>
+<<<<<<< HEAD
   </head>
+=======
+</head>
+
+<body>
+    <div class="d-flex justify-content-center col-lg-12 col-md-8 col-10 ">
+        <h1 class="d-flex justify-content-center">Transposición de Notas y Canción para Saxofón</h1>
+    </div>
+    <div class="container">
+        <div class="row">
+            <!-- Campo para el título de la canción -->
+            <label for="inputTitulo">Título de la Canción:</label>
+            <input type="text" id="inputTitulo" placeholder="Escribe el título de la canción">
+
+            <!-- Selector para el tipo de sección -->
+            <label for="seccion">Selecciona la sección de la canción:</label>
+            <select id="seccion">
+                <option value="Intro">Intro</option>
+                <option value="Verso">Verso</option>
+                <option value="PreCoro">PreCoro</option>
+                <option value="Coro">Coro</option>
+                <option value="Puente">Puente</option>
+                <option value="Instrumental">Instrumental</option>
+                <option value="Final">Final</option>
+            </select>
+
+            <!-- Campos para notas y letra -->
+            <label for="inputNotas">Escribe las notas de la línea (opcional):</label>
+            <input type="text" id="inputNotas" placeholder="Ej: C, D, E, F, G">
+
+            <label for="inputLetra">Escribe la letra de la canción (opcional):</label>
+            <input type="text" id="inputLetra" placeholder="Escribe la letra de la línea">
+
+            <div class="d-flex justify-content-center">
+                <!-- Botón para agregar la línea a la canción -->
+                <button class="btnagregar col-lg-4 col-md-8 col-sm-10 col-10" id="agregarBtn"
+                    onclick="agregarLinea()">Agregar a Canción</button>
+
+                <!-- Botón para guardar cambios en la edición -->
+                <button class="btnagregar" id="guardarBtn" style="display:none;" onclick="guardarCambios()">Guardar
+                    Cambios</button>
+            </div>
+
+            <!-- Leyenda para indicar cómo editar -->
+            <div class="leyenda">Para editar la canción, haga clic en la línea correspondiente.</div>
+
+            <!-- Sección donde se mostrará la canción -->
+            <div id="cancion" class="cancion">
+                <h2 id="tituloCancion">Canción:</h2>
+                <!-- Aquí se mostrará la canción -->
+            </div>
+
+            <!-- Botón para imprimir -->
+            <div class="d-flex justify-content-center">
+                <button class="btnimprimir col-lg-4 col-md-8 col-sm-10 col-10 " onclick="imprimirCancion()">Imprimir
+                    Canción</button>
+            </div>
+
+            <!-- Texto creado por -->
+            <div class="creado-por" id="creadoPor">Creado por Ramón A.</div>
+             <div class="creado-por" id="creadoPor">Para Mi Amigo Elias D.</div>
+>>>>>>> 93985b79f2f311e31eb3f431c74eb293b195097a
 
   <body>
     <div class="container col-lg-12 col-md-8 col-12">
@@ -262,5 +324,11 @@
         window.print();
       }
     </script>
+<<<<<<< HEAD
   </body>
+=======
+
+</body>
+
+>>>>>>> 93985b79f2f311e31eb3f431c74eb293b195097a
 </html>
