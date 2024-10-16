@@ -1,0 +1,142 @@
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-repeat: url(/istockphoto-1409828623-1024x1024.jpg);
+        }
+        h1{
+            text-align: center;
+        }
+        .btnpaginas{
+            text-align: center;
+            margin-top: 40px;
+        }
+        .btnBotonesPaginas1{
+            margin: 20px;
+            text-decoration: none;
+            background: black;
+            padding: 15px;
+            color: white;
+            border-radius: 15px;
+        }
+        .btnBotonesPaginas2{
+            margin: 20px;
+            text-decoration: none;
+            background: rgb(27, 158, 77);
+            padding: 15px;
+            color: white;
+            border-radius: 15px;
+        }
+        .btnBotonesPaginas4{
+            margin: 20px;
+            text-decoration: none;
+            background: black;
+            padding: 15px;
+            color: white;
+            border-radius: 15px;
+        }
+        .btnBotonesPaginas3{
+            margin: 20px;
+            text-decoration: none;
+            background: rgb(27, 158, 77);
+            padding: 15px;
+            color: white;
+            border-radius: 15px;
+        }
+
+        blockquote{
+            text-align: center;
+            color: gray;
+            margin-top: 30px;
+            font-size: 13px;
+            font-family: cursive;
+
+        }
+        input,
+        select {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 16px;
+            border-radius: 20px;
+            text-decoration: none;
+        }
+
+        .btnimprimir {
+            border-radius: 20px;
+            background-color: black;
+            color: white;
+
+        }
+        .btnConversiones{
+            border-radius: 20px;
+            background-color: black;
+            color: white;
+        }
+
+        .btnagregar {
+            border-radius: 20px;
+            background-color: black;
+            color: white;
+        }
+
+        button {
+            font-size: 18px;
+            padding: 10px 20px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .cancion {
+            margin-top: 30px;
+            border-top: 1px solid #000;
+            padding-top: 10px;
+        }
+
+        .linea-cancion {
+            font-size: 18px;
+            margin: 10px 0;
+            cursor: pointer;
+            /* Cambia el cursor para indicar que es clickeable */
+        }
+
+        .seccion {
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+
+        .notas {
+            font-weight: bold;
+        }
+
+        /* Ocultar los campos de entrada y el botón en la impresión */
+        @media print {
+
+            input,
+            button,
+            select,
+            h1,
+            label {
+                display: none;
+            }
+
+            #tituloCancion,
+            .cancion,
+            .creado-por {
+                display: block;
+            }
+        }
+
+        .creado-por {
+            margin-top: 50px;
+            font-style: italic;
+            text-align: center;
+        }
+
+        .leyenda {
+            font-size: 14px;
+            color: gray;
+            margin-top: 10px;
+        }
+    

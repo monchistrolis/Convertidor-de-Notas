@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css.css" />
+    <link rel="stylesheet" href="/page2.js" />
+    <link rel="icon" href="/saxofon.png" />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+    <title>Piano a saxo Alto</title>
+    <style>
+      @media print {
+        /* Ocultar todo menos la canción durante la impresión */
+        body * {
+          visibility: hidden;
+        }
+        #cancion, #cancion * {
+          visibility: visible;
+        }
+        #cancion {
+          position: absolute;
+          top: 0;
+          left: 0;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container col-lg-12 col-md-8 col-12">
+      <div class="row col-12">
+        <div class="mt-3">
+          <h1>Transposición de Notas y Canción para Saxofón</h1>
+        </div>
+      </div>
+    </div>
+
+    <div class="container col-lg-12">
+      <div class="row">
+        <div class="btnpaginas">
+          <a class="btnBotonesPaginas3 " href="/pag2.html">Piano a Saxo Tenor</a>
+        </div>
+        <div class="btnpaginas">
+          <a class="btnBotonesPaginas4" href="/index.html">Piano a Saxo Alto</a>
+        </div>
+        <blockquote>
+          cuando esté en verde significa que estás en ese convertidor
+        </blockquote>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <!-- Campo para el título de la canción -->
+        <label for="inputTitulo">Título de la Canción:</label>
+        <input
+          type="text"
+          id="inputTitulo"
+          placeholder="Escribe el título de la canción"
+        />
+
+        <!-- Selector para el tipo de sección -->
+        <label for="seccion">Selecciona la sección de la canción:</label>
+        <select id="seccion">
+          <option value="">Solo Notas</option>
+          <option value="Intro">Intro</option>
+          <option value="Verso">Verso</option>
+          <option value="PreCoro">PreCoro</option>
+          <option value="Coro">Coro</option>
+          <option value="Puente">Puente</option>
+          <option value="Instrumental">Instrumental</option>
+          <option value="Final">Final</option>
+        </select>
+
+        <!-- Campos para notas y letra -->
+        <label for="inputNotas"
+          >Escribe las notas de la línea (opcional):</label
+        >
+        <input type="text" id="inputNotas" placeholder="Ej: C, D, E, F, G" />
+
+        <label for="inputLetra"
+          >Escribe la letra de la canción (opcional):</label
+        >
+        <input
+          type="text"
+          id="inputLetra"
+          placeholder="Escribe la letra de la línea"
+        />
+
+        <div class="d-flex justify-content-center">
+          <!-- Botón para agregar la línea a la canción -->
+          <button
+            class="btnagregar col-lg-4 col-md-8 col-sm-10 col-10 mt-3"
+            id="agregarBtn"
+            onclick="agregarLinea()"
+          >
+            Agregar a Canción
+          </button>
+
+          <!-- Botón para guardar cambios en la edición -->
+          <button
+            class="btnagregar"
+            id="guardarBtn"
+            style="display: none"
+            onclick="guardarCambios()"
+          >
+            Guardar Cambios
+          </button>
+        </div>
+
+        <!-- Leyenda para indicar cómo editar -->
+        <div class="leyenda">
+          Para editar la canción, haga clic en la línea correspondiente.
+        </div>
+
+        <!-- Sección donde se mostrará la canción -->
+        <div id="cancion" class="cancion">
+          <h2 id="tituloCancion">Canción:</h2>
+          <!-- Aquí se mostrará la canción -->
+        </div>
+
+        <!-- Botón para imprimir -->
+        <div class="d-flex justify-content-center">
+          <button
+            class="btnimprimir col-lg-4 col-md-8 col-sm-10 col-10"
+            onclick="imprimirCancion()"
+          >
+            Imprimir Canción
+          </button>
+        </div>
+
+        <!-- Texto creado por -->
+        <div class="creado-por" id="creadoPor">Creado por Ramón A.</div>
+      </div>
+    </div>
+
+    <script>
+        const notas = {
+            'C': 0, 'C#': 1, 'D': 2, 'D#': 3, 'E': 4, 'F': 5, 'F#': 6,
+            'G': 7, 'G#': 8, 'A': 9, 'A#': 10, 'B': 11
+        };
+        
+        const notasInverso = Object.keys(notas).reduce((obj, key) => {
+            obj[notas[key]] = key;
+            return obj;
+        }, {});
+        
+        let lineaEditando = null;
+        
+        // Subir 1 tono (2 semitonos)
+        function transponerNota(nota) {
+            let semitonos = notas[nota.toUpperCase()];
+            if (semitonos === undefined) return "Nota no válida";
+            // Sumar 2 semitonos para subir 1 tono
+            let nuevaNota = (semitonos + 2) % 12;
+            return notasInverso[nuevaNota];
+        }
+        
+        function transponerNotas(notas) {
+            if (!notas) return ''; // Si no hay notas, devolver cadena vacía
+            return notas.split(',').map(nota => transponerNota(nota.trim())).join(', ');
+        }
+        
+        function agregarLinea() {
+            const inputNotas = document.getElementById('inputNotas').value;
+            const inputLetra = document.getElementById('inputLetra').value;
+            const inputTitulo = document.getElementById('inputTitulo').value;
+            const seccion = document.getElementById('seccion').value;
+        
+            if (inputTitulo.trim() !== '') {
+                document.getElementById('tituloCancion').innerText = inputTitulo;
+            }
+        
+            const notasTranspuestas = transponerNotas(inputNotas);
+            const cancionDiv = document.getElementById('cancion');
+        
+            // Crear la estructura de la línea con la sección, notas y letra
+            const lineaDiv = document.createElement('div');
+            lineaDiv.classList.add('linea-cancion');
+            lineaDiv.onclick = function () { editarLinea(lineaDiv); };
+        
+            const seccionDiv = document.createElement('div');
+            seccionDiv.classList.add('seccion');
+            seccionDiv.innerHTML = seccion;
+        
+            const notasDiv = document.createElement('div');
+            notasDiv.classList.add('notas');
+            notasDiv.innerHTML = notasTranspuestas;
+        
+            const letraDiv = document.createElement('div');
+            letraDiv.innerHTML = inputLetra;
+        
+            lineaDiv.appendChild(seccionDiv);
+            if (notasTranspuestas) lineaDiv.appendChild(notasDiv);
+            if (inputLetra.trim()) lineaDiv.appendChild(letraDiv);
+        
+            // Insertar la nueva línea en el div de la canción
+            cancionDiv.appendChild(lineaDiv);
+        
+            // Limpiar los campos de input
+            document.getElementById('inputNotas').value = '';
+            document.getElementById('inputLetra').value = '';
+        }
+        
+        function editarLinea(linea) {
+            const seccion = linea.querySelector('.seccion').innerText;
+            const letra = linea.querySelector('div:not(.seccion):not(.notas)') ? linea.querySelector('div:not(.seccion):not(.notas)').innerText : '';
+        
+            // Obtener la nota original desde el div de notas
+            const notasOriginales = linea.querySelector('.notas').innerText;
+        
+            // Cargar los valores en los campos de input
+            document.getElementById('seccion').value = seccion;
+            document.getElementById('inputNotas').value = notasOriginales; // Aquí se muestra la nota original
+            document.getElementById('inputLetra').value = letra;
+        
+            // Guardar referencia a la línea que estamos editando
+            lineaEditando = linea;
+        
+            // Mostrar botón de "Guardar Cambios" y ocultar "Agregar"
+            document.getElementById('guardarBtn').style.display = 'inline-block';
+            document.getElementById('agregarBtn').style.display = 'none';
+        }
+        
+        function guardarCambios() {
+            if (lineaEditando) {
+                const seccion = document.getElementById('seccion').value;
+                const notas = document.getElementById('inputNotas').value;
+                const letra = document.getElementById('inputLetra').value;
+        
+                // Actualizar el contenido de la línea editando
+                lineaEditando.querySelector('.seccion').innerText = seccion;
+                lineaEditando.querySelector('.notas').innerText = notas;
+                lineaEditando.querySelector('div:not(.seccion):not(.notas)').innerText = letra;
+        
+                // Limpiar los campos de input
+                document.getElementById('inputNotas').value = '';
+                document.getElementById('inputLetra').value = '';
+                lineaEditando = null;
+                document.getElementById('guardarBtn').style.display = 'none';
+                document.getElementById('agregarBtn').style.display = 'inline-block';
+            }
+        }
+        
+        function imprimirCancion() {
+            window.print();
+        }
+        
+    </script>
+  </body>
+</html>
